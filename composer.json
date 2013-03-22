@@ -1,0 +1,7 @@
+{
+    "name": "verband/doctrine",
+    "description": "Adds Doctrine functionality to Verband",
+    "require": {
+        "verband/application": "dev-master"
+    }
+}
