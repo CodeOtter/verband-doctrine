@@ -1,5 +1,6 @@
 {
-    "name": "verband/doctrine",
+    "name": "Verband/Doctrine",
+    "type": "verband-package"
     "description": "Adds Doctrine functionality to Verband",
     "require": {
 	"doctrine/orm": ">=2.2.3,<2.4-dev"
