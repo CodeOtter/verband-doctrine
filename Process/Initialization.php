@@ -1,9 +1,9 @@
 <?php 
 
-namespace Doctrine\Process;
+namespace Verband\Doctrine\Process;
 
-use Framework\Process;
-use Framework\Context;
+use Verband\Framework\Process;
+use Verband\Framework\Context;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\Mapping\Driver\YamlDriver;
 use Doctrine\ORM\EntityManager;

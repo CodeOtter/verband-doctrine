@@ -1,12 +1,12 @@
 <?php 
 
-namespace Doctrine;
+namespace Verband\Doctrine;
 
-use Framework\Core;
-use Framework\Package;
-use Framework\Context;
-use Framework\Process;
-use Doctrine\Process\Initialization;
+use Verband\Framework\Core;
+use Verband\Framework\Package;
+use Verband\Framework\Context;
+use Verband\Framework\Process;
+use Verband\Doctrine\Process\Initialization;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\YamlDriver;
@@ -75,12 +75,10 @@ class Startup extends Package {
 	 * @return array
 	 */
 	public function getNamespaces($contexts) {
-		$path = $contexts->getState('framework')->getPath(\Framework\Core::PATH_PACKAGES) . '/Doctrine/Core/lib';
+		$path = $contexts->getState('framework')->getPath(\Framework\Core::PATH_PACKAGES);
 
 		return array(
-			'Doctrine\Common'	=> $path . '/vendor/doctrine-common/lib',
-			'Doctrine\DBAL'		=> $path . '/vendor/doctrine-dbal/lib',
-			'Doctrine\ORM'		=> $path
+			'Doctrine'	=> $path . '/{composer}/lib/{Vendor}/{Package}'
 		);
 	}
 }

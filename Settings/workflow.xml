@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
-<package name="Doctrine">
+<package name="Verband\Doctrine">
 	<process name="Initialization" />
 </package>
