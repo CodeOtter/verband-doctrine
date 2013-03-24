@@ -1,5 +1,5 @@
 {
-    "name": "Verband/Doctrine",
+    "name": "verband/doctrine",
     "type": "verband-component",
     "description": "Adds Doctrine functionality to Verband",
     "require": {
