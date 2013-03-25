@@ -75,10 +75,10 @@ class Startup extends Package {
 	 * @return array
 	 */
 	public function getNamespaces($contexts) {
-		$path = $contexts->getState('framework')->getPath(\Framework\Core::PATH_PACKAGES);
+		$path = $contexts->getState('framework')->getPath(Core::PATH_PACKAGES);
 
 		return array(
-			'Doctrine'	=> $path . '/{composer}/lib/{Vendor}/{Package}'
+			'Doctrine'	=> $path . '/{first.lc}/{1.lc}/lib/{>-1}'
 		);
 	}
 }
