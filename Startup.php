@@ -3,9 +3,9 @@
 namespace Verband\Doctrine;
 
 use Verband\Framework\Core;
-use Verband\Framework\Package;
-use Verband\Framework\Context;
-use Verband\Framework\Process;
+use Verband\Framework\Structure\Package;
+use Verband\Framework\Structure\Context;
+use Verband\Framework\Structure\Process;
 use Verband\Doctrine\Process\Initialization;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
@@ -74,11 +74,9 @@ class Startup extends Package {
 	 * @see Framework.Package::getNamespaces()
 	 * @return array
 	 */
-	public function getNamespaces($contexts) {
-		$path = $contexts->getState('framework')->getPath(Core::PATH_PACKAGES);
-
+	public function getNamespaces($packagesPath) {
 		return array(
-			'Doctrine'	=> $path . '/{first.lc}/{1.lc}/lib/{>-1}'
+			'Doctrine'	=> $packagesPath . '/{first.lc}/{1.lc}/lib/{>-1}'
 		);
 	}
 }

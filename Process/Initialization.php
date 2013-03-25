@@ -2,8 +2,8 @@
 
 namespace Verband\Doctrine\Process;
 
-use Verband\Framework\Process;
-use Verband\Framework\Context;
+use Verband\Framework\Structure\Process;
+use Verband\Framework\Structure\Context;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\Mapping\Driver\YamlDriver;
 use Doctrine\ORM\EntityManager;
