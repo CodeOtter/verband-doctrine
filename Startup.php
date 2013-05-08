@@ -2,6 +2,8 @@
 
 namespace Verband\Doctrine;
 
+use Verband\Framework\Util\Nomenclature;
+
 use Verband\Framework\Core;
 use Verband\Framework\Structure\Package;
 use Verband\Framework\Structure\Context;
@@ -38,9 +40,20 @@ class Startup extends Package {
 
 		$entityPaths = array();
 		foreach($framework->getPackages() as $index => $package) {
+			// Load ORMS
 			$directory = $package->getDirectory() . Core::PATH_ORM_SETTINGS;
 			if(file_exists($directory)) {
 				$entityPaths[] = $directory;
+			}
+
+			// Register custom query functions
+			$queryFunctionDirectory = $package->getDirectory() . '/QueryFunction';
+			if(is_dir($queryFunctionDirectory)) {
+			    $queryFunctions = array_diff(scandir($queryFunctionDirectory), array('.', '..'));
+			    foreach($queryFunctions as $queryFunction) {
+			        $functionName = basename($queryFunction, '.php');
+			        $config->addCustomNumericFunction(strtoupper($functionName), Nomenclature::getVendorAndPackage($package).'\QueryFunction\\'.$functionName);
+			    }
 			}
 		}
 
