@@ -2,6 +2,7 @@
 
 namespace Verband\Doctrine;
 
+use Doctrine\Common\Cache\ApcCache;
 use Verband\Framework\Util\Nomenclature;
 
 use Verband\Framework\Core;
@@ -28,17 +29,20 @@ class Startup extends Package {
 			$framework->getEnvironment() == Core::ENVIRONMENT_TEST ||
 			$framework->getEnvironment() == Core::ENVIRONMENT_LOCAL || 
 			$framework->getEnvironment() == Core::ENVIRONMENT_DEV;
-
-		if($inDevelopment) {
-			$cache = new \Doctrine\Common\Cache\ArrayCache;
-		} else {
-			$cache = new \Doctrine\Common\Cache\ApcCache;
-		}
-
+	
 		$config = new Configuration();
-		$config->setMetadataCacheImpl($cache);
-
+		// @TODO Toggle between APC and Memcache
+		$cacheDriver = new ApcCache();
 		$entityPaths = array();
+
+/*
+		if($inDevelopment) {
+			$cacheDriver = new \Doctrine\Common\Cache\ArrayCache;
+		} else {
+			$cacheDriver = $apcCache;
+		}
+*/
+
 		foreach($framework->getPackages() as $index => $package) {
 			// Load ORMS
 			$directory = $package->getDirectory() . Core::PATH_ORM_SETTINGS;
@@ -57,9 +61,10 @@ class Startup extends Package {
 			}
 		}
 
-		$driverImpl = new YamlDriver($entityPaths);
-		$config->setMetadataDriverImpl($driverImpl);
-		$config->setQueryCacheImpl($cache);
+		$config->setMetadataDriverImpl(new YamlDriver($entityPaths));
+		$config->setMetadataCacheImpl($cacheDriver);
+		$config->setQueryCacheImpl($cacheDriver);
+		$config->setResultCacheImpl($cacheDriver);
 
 		// @TODO: Figure this out
 		$config->setProxyDir($framework->getPath(Core::PATH_PACKAGES) . '/Doctrine/Proxies');
