@@ -4,6 +4,6 @@
     "description": "Adds Doctrine functionality to Verband",
     "require": {
 		"doctrine/orm": ">=2.2.3,<2.4-dev",
-		"doctrine/migrations": "dev-feature/migrations3.0"
+		"doctrine/migrations": "dev-master"
     }
 }
