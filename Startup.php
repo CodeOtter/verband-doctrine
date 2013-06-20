@@ -94,7 +94,8 @@ class Startup extends Package {
 	 */
 	public function getNamespaces($packagesPath) {
 		return array(
-			'Doctrine'	=> $packagesPath . '/{first.lc}/{1.lc}/lib/{>-1}'
+			'Doctrine\DBAL\Migrations'  => $packagesPath . '/doctrine/migrations/lib/{>-1}',
+			'Doctrine'					=> $packagesPath . '/{first.lc}/{1.lc}/lib/{>-1}'
 		);
 	}
 }
