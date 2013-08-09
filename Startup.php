@@ -25,10 +25,12 @@ class Startup extends Package {
 	 */
 	public function init($contexts) {
 		$framework = $contexts->getState('framework');
+		$environment = $framework->getEnvironment();
+
 		$inDevelopment =
-			$framework->getEnvironment() == Core::ENVIRONMENT_TEST ||
-			$framework->getEnvironment() == Core::ENVIRONMENT_LOCAL || 
-			$framework->getEnvironment() == Core::ENVIRONMENT_DEV;
+			$environment == Core::ENVIRONMENT_TEST ||
+			$environment == Core::ENVIRONMENT_LOCAL || 
+			$environment == Core::ENVIRONMENT_DEV;
 	
 		$config = new Configuration();
 		// @TODO Toggle between APC and Memcache
@@ -76,11 +78,16 @@ class Startup extends Package {
 			$config->setAutoGenerateProxyClasses(false);
 		}
 
+		$databaseConfig = $framework->getSetting('Application[database]');
+		if(!isset($databaseConfig[$environment])) {
+		    $environment = 'main';
+		}
+
 		$connectionOptions = array(
-			'driver'   => $framework->getSetting('Application[database][driver]', null, true),
-			'user'     => $framework->getSetting('Application[database][user]', null, true),
-			'password' => $framework->getSetting('Application[database][password]', null, true),
-			'dbname'   => $framework->getSetting('Application[database][name]', null, true),
+			'driver'   => $databaseConfig[$environment]['driver'],
+			'user'     => $databaseConfig[$environment]['user'],
+			'password' => $databaseConfig[$environment]['password'],
+			'dbname'   => $databaseConfig[$environment]['name']
 		);
 
 		// @TODO: Allow many entity managers
