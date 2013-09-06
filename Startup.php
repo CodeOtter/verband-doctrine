@@ -71,12 +71,7 @@ class Startup extends Package {
 		// @TODO: Figure this out
 		$config->setProxyDir($framework->getPath(Core::PATH_PACKAGES) . '/Doctrine/Proxies');
 		$config->setProxyNamespace('Doctrine\Proxies');
-
-		if ($inDevelopment) {
-			$config->setAutoGenerateProxyClasses(true);
-		} else {
-			$config->setAutoGenerateProxyClasses(false);
-		}
+		$config->setAutoGenerateProxyClasses($inDevelopment);
 
 		$databaseConfig = $framework->getSetting('Application[database]');
 		if(!isset($databaseConfig[$environment])) {
