@@ -5,5 +5,7 @@
     "require": {
 		"doctrine/orm": ">=2.2.3,<2.4-dev",
 		"doctrine/migrations": "dev-master"
-    }
+    },
+    "autoload": { "psr-0": { "Verband\\Doctrine": "" }},
+    "target-dir": "Verband/Doctrine"
 }
