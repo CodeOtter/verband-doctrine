@@ -4,7 +4,6 @@ namespace Verband\Doctrine;
 
 use Doctrine\Common\Cache\ApcCache;
 use Verband\Framework\Util\Nomenclature;
-
 use Verband\Framework\Core;
 use Verband\Framework\Structure\Package;
 use Verband\Framework\Structure\Context;
@@ -13,6 +12,7 @@ use Verband\Doctrine\Process\Initialization;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\YamlDriver;
+use Doctrine\Common\ClassLoader;
 
 /**
  * The Core package.  Currently only established the root framework.init Context.
@@ -63,6 +63,8 @@ class Startup extends Package {
 			}
 		}
 
+		//$framework->getAutoloader()->add('Doctrine\DBAL\Migrations', $framework->getPath(Core::PATH_PACKAGES) . '/doctrine/migrations/lib'); /* /Doctrine/DBAL/Migrations */
+		
 		$config->setMetadataDriverImpl(new YamlDriver($entityPaths));
 		$config->setMetadataCacheImpl($cacheDriver);
 		$config->setQueryCacheImpl($cacheDriver);
@@ -94,10 +96,10 @@ class Startup extends Package {
 	 * @see Framework.Package::getNamespaces()
 	 * @return array
 	 */
-	public function getNamespaces($packagesPath) {
+	/*public function getNamespaces($packagesPath) {
 		return array(
 			'Doctrine\DBAL\Migrations'  => $packagesPath . '/doctrine/migrations/lib/{>-1}',
 			'Doctrine'					=> $packagesPath . '/{first.lc}/{1.lc}/lib/{>-1}'
 		);
-	}
+	}*/
 }
